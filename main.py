@@ -36,7 +36,8 @@ class Snake:
         self.segments.append([self.x, self.y])
 
     def check_collision(self, apple):
-        if self.x < 0 or self.y < 0 or self.x > WIDTH - 20 or self.y > HEIGHT - 20:
+        if self.x < 0 or self.y < 0 or \
+                self.x > WIDTH - 20 or self.y > HEIGHT - 20:
             # When the snake goes outside the boundary
             self.alive = False
             return True
@@ -173,17 +174,18 @@ def main():
             snake.draw(apple)
         else:
             break
-        clock.tick(max(5, len(snake.segments)//2))
+        clock.tick(max(5, len(snake.segments) // 2))
     while True:
         win.fill(0x000000)
         message("You died! Press 'q' to quit or 'a' to play again",
-                0xFFFFFF, (WIDTH//2, HEIGHT//2))
+                0xFFFFFF, (WIDTH // 2, HEIGHT // 2))
         pygame.display.update()
         if snake.score > snake.high_score:
             snake.save_high_score()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
+                    pygame.quit()
                     exit()
                 elif event.key == pygame.K_a:
                     main()
